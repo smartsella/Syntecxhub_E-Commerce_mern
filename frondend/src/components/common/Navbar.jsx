@@ -28,11 +28,12 @@ const Navbar = () => {
   const cartCount = getCartCount();
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-lg border-b border-amber-100">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-amber-200 shadow-sm">
       <div className="container-custom">
-        <div className="navbar py-4">
-          {/* Mobile Menu Button */}
-          <div className="navbar-start">
+        <div className="flex items-center justify-between py-4">
+          {/* Left Section */}
+          <div className="flex items-center gap-4">
+            {/* Mobile Menu */}
             <button
               className="btn btn-ghost lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -41,113 +42,86 @@ const Navbar = () => {
             </button>
 
             {/* Logo */}
-            <Link to="/" className="ml-2">
-              <div className="flex items-center space-x-2">
-                <div className="bg-gradient-to-r from-amber-600 to-orange-500 p-2 rounded-lg">
-                  <Package className="h-6 w-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold">
-                  <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
-                    Shop
-                  </span>
-                  <span className="text-gray-800">Now</span>
-                </span>
+            <Link to="/" className="flex items-center gap-2">
+              <div className="bg-gradient-to-r from-amber-600 to-orange-500 p-2 rounded-lg">
+                <Package className="h-6 w-6 text-white" />
               </div>
+              <span className="text-2xl font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
+                  Shop
+                </span>
+                <span className="text-gray-900">Now</span>
+              </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 space-x-2">
-              <li>
-                <Link
-                  to="/"
-                  className="text-gray-700 hover:text-amber-600 font-medium"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/shop"
-                  className="text-gray-700 hover:text-amber-600 font-medium"
-                >
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <details>
-                  <summary className="text-gray-700 hover:text-amber-600 font-medium">
-                    Categories
-                  </summary>
-                  <ul className="p-2 bg-white shadow-xl border border-amber-100 rounded-lg w-48">
-                    <li>
-                      <Link
-                        to="/shop?category=electronics"
-                        className="hover:text-amber-600"
-                      >
-                        Electronics
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/shop?category=fashion"
-                        className="hover:text-amber-600"
-                      >
-                        Fashion
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/shop?category=home"
-                        className="hover:text-amber-600"
-                      >
-                        Home & Garden
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/shop?category=sports"
-                        className="hover:text-amber-600"
-                      >
-                        Sports
-                      </Link>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-              {isAdmin && (
+          {/* Center Nav (Desktop) */}
+          <ul className="hidden lg:flex items-center gap-6 text-[15px] font-medium">
+            <li>
+              <Link to="/" className="hover:text-amber-600 transition">
+                Home
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/shop" className="hover:text-amber-600 transition">
+                Shop
+              </Link>
+            </li>
+
+            <li className="relative group">
+              <span className="cursor-pointer hover:text-amber-600 transition">
+                Categories
+              </span>
+              <ul className="absolute left-0 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition bg-white border border-amber-200 rounded-lg shadow-md w-44 p-2 space-y-1">
                 <li>
                   <Link
-                    to="/admin"
-                    className="text-gray-700 hover:text-amber-600 font-medium"
+                    to="/shop?category=electronics"
+                    className="block px-3 py-2 hover:bg-amber-50 rounded"
                   >
-                    Admin
+                    Electronics
                   </Link>
                 </li>
-              )}
-            </ul>
-          </div>
+                <li>
+                  <Link
+                    to="/shop?category=fashion"
+                    className="block px-3 py-2 hover:bg-amber-50 rounded"
+                  >
+                    Fashion
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/shop?category=home"
+                    className="block px-3 py-2 hover:bg-amber-50 rounded"
+                  >
+                    Home & Garden
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/shop?category=sports"
+                    className="block px-3 py-2 hover:bg-amber-50 rounded"
+                  >
+                    Sports
+                  </Link>
+                </li>
+              </ul>
+            </li>
 
-          {/* Search Bar (Desktop) */}
-          {/* <div className="navbar-center hidden lg:flex flex-1 max-w-xl mx-4">
-            <SearchBar />
-          </div> */}
+            {isAdmin && (
+              <li>
+                <Link to="/admin" className="hover:text-amber-600 transition">
+                  Admin
+                </Link>
+              </li>
+            )}
+          </ul>
 
-          {/* User Actions */}
-          <div className="navbar-end space-x-2">
-            {/* Search (Mobile) */}
-            <div className="dropdown dropdown-end lg:hidden">
-              <button className="btn btn-ghost btn-circle">
-                <Search size={20} />
-              </button>
-              {/* <div className="dropdown-content mt-3 p-4 shadow-xl bg-white border border-amber-100 rounded-box w-80">
-                <SearchBar />
-              </div> */}
-            </div>
-
+          {/* Right Section */}
+          <div className="flex items-center gap-4">
             {/* Cart */}
-            <Link to="/cart" className="btn btn-ghost btn-circle relative">
+            <Link to="/cart" className="relative btn btn-ghost btn-circle">
               <ShoppingCart size={20} />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-600 to-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
@@ -156,7 +130,7 @@ const Navbar = () => {
               )}
             </Link>
 
-            {/* User Dropdown */}
+            {/* User */}
             {isAuthenticated ? (
               <div className="dropdown dropdown-end">
                 <div className="btn btn-ghost btn-circle avatar">
@@ -164,18 +138,19 @@ const Navbar = () => {
                     {user?.name?.charAt(0).toUpperCase()}
                   </div>
                 </div>
-                <ul className="dropdown-content mt-3 p-4 shadow-xl bg-white border border-amber-100 rounded-box w-56">
-                  <li className="p-2">
+
+                <ul className="dropdown-content mt-3 p-4 shadow-xl bg-white border border-amber-100 rounded-lg w-56">
+                  <li className="mb-2">
                     <div className="font-semibold text-gray-800">
                       {user?.name}
                     </div>
                     <div className="text-sm text-gray-500">{user?.email}</div>
                   </li>
-                  <div className="divider my-2"></div>
+
                   <li>
                     <Link
                       to="/dashboard"
-                      className="py-2 px-3 hover:bg-amber-50 rounded-lg flex items-center"
+                      className="py-2 px-3 hover:bg-amber-50 rounded flex items-center"
                     >
                       <User size={16} className="mr-2" />
                       Dashboard
@@ -184,29 +159,27 @@ const Navbar = () => {
                   <li>
                     <Link
                       to="/dashboard/orders"
-                      className="py-2 px-3 hover:bg-amber-50 rounded-lg"
+                      className="py-2 px-3 hover:bg-amber-50 rounded"
                     >
                       My Orders
                     </Link>
                   </li>
+
                   {isAdmin && (
-                    <>
-                      <div className="divider my-2"></div>
-                      <li>
-                        <Link
-                          to="/admin"
-                          className="py-2 px-3 hover:bg-amber-50 rounded-lg text-amber-600 font-medium"
-                        >
-                          Admin Dashboard
-                        </Link>
-                      </li>
-                    </>
+                    <li>
+                      <Link
+                        to="/admin"
+                        className="py-2 px-3 hover:bg-amber-50 rounded text-amber-600 font-medium"
+                      >
+                        Admin Dashboard
+                      </Link>
+                    </li>
                   )}
-                  <div className="divider my-2"></div>
+
                   <li>
                     <button
                       onClick={handleLogout}
-                      className="py-2 px-3 hover:bg-red-50 rounded-lg text-red-500 w-full text-left flex items-center"
+                      className="py-2 px-3 hover:bg-red-50 rounded text-red-500 flex items-center w-full text-left"
                     >
                       <LogOut size={16} className="mr-2" />
                       Logout
@@ -215,7 +188,10 @@ const Navbar = () => {
                 </ul>
               </div>
             ) : (
-              <Link to="/login" className="btn-amber">
+              <Link
+                to="/login"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-600 to-orange-500 text-white font-medium"
+              >
                 Login
               </Link>
             )}
@@ -224,25 +200,26 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-2 pb-6 bg-white border border-amber-100 rounded-xl shadow-lg">
+          <div className="lg:hidden mt-2 pb-5 bg-white border border-amber-200 rounded-xl shadow-md">
             <div className="p-4 space-y-3">
               <Link
                 to="/"
-                className="block py-3 px-4 hover:bg-amber-50 rounded-lg font-medium"
+                className="block py-2 px-3 hover:bg-amber-50 rounded"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/shop"
-                className="block py-3 px-4 hover:bg-amber-50 rounded-lg font-medium"
+                className="block py-2 px-3 hover:bg-amber-50 rounded"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Shop
               </Link>
-              <div className="px-4">
-                <div className="font-medium text-gray-700 mb-2">Categories</div>
-                <div className="pl-4 space-y-2">
+
+              <div>
+                <div className="text-gray-700 font-medium mb-2">Categories</div>
+                <div className="pl-3 space-y-2">
                   <Link
                     to="/shop?category=electronics"
                     className="block py-2 hover:text-amber-600"
@@ -266,45 +243,46 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
+
               {isAuthenticated ? (
                 <>
-                  <div className="divider"></div>
                   <Link
                     to="/dashboard"
-                    className="block py-3 px-4 hover:bg-amber-50 rounded-lg font-medium"
+                    className="block py-3 px-4 hover:bg-amber-50 rounded"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Dashboard
                   </Link>
+
                   {isAdmin && (
                     <Link
                       to="/admin"
-                      className="block py-3 px-4 hover:bg-amber-50 rounded-lg font-medium text-amber-600"
+                      className="block py-3 px-4 hover:bg-amber-50 rounded text-amber-600 font-semibold"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Admin Panel
                     </Link>
                   )}
+
                   <button
                     onClick={handleLogout}
-                    className="block py-3 px-4 hover:bg-red-50 rounded-lg font-medium text-red-500 w-full text-left"
+                    className="block py-3 px-4 hover:bg-red-50 rounded text-red-500 w-full text-left"
                   >
                     Logout
                   </button>
                 </>
               ) : (
                 <>
-                  <div className="divider"></div>
                   <Link
                     to="/login"
-                    className="block py-3 px-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-lg font-medium text-center"
+                    className="block py-3 px-4 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
-                    className="block py-3 px-4 border-2 border-amber-600 text-amber-600 rounded-lg font-medium text-center"
+                    className="block py-3 px-4 border-2 border-amber-600 text-amber-600 rounded text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Register

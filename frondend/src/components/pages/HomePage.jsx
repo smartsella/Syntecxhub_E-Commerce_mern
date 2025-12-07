@@ -8,8 +8,8 @@ import {
   Clock,
   TrendingUp,
 } from "lucide-react";
-// import ProductCard from "../components/products/ProductCard";
-// import CategoryCard from "../components/products/CategoryCard";
+import ProductCard from "../../components/products/ProductCard.jsx";
+import CategoryCard from "../../components/products/CategoryCard.jsx";
 import productService from "../../services/productService.js";
 import { CATEGORIES } from "../../utils/constants.js";
 
@@ -70,28 +70,33 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 py-20">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left content */}
             <div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <h1 className="mb-6 text-5xl font-bold md:text-6xl">
                 <span className="block">Discover Amazing</span>
                 <span className="block bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
                   Products Online
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+
+              <p className="mb-8 text-xl text-gray-600">
                 Shop the latest trends in electronics, fashion, home decor, and
                 more. Quality products at unbeatable prices with fast delivery.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <Link to="/shop" className="btn-amber group">
                   Shop Now
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link to="/categories" className="btn-amber-outline">
                   Browse Categories
                 </Link>
               </div>
             </div>
+
+            {/* Right image + floating cards */}
             <div className="relative">
               <div className="relative z-10">
                 <img
@@ -100,12 +105,15 @@ const HomePage = () => {
                   className="rounded-2xl shadow-2xl"
                 />
               </div>
-              {/* Floating Elements */}
-              <div className="absolute -top-6 -left-6 bg-gradient-to-r from-amber-600 to-orange-500 text-white p-4 rounded-xl shadow-xl">
+
+              {/* 50% OFF badge */}
+              <div className="absolute -top-6 -left-9 rounded-xl bg-gradient-to-r from-amber-600 to-orange-500 p-4 text-white shadow-xl">
                 <div className="text-2xl font-bold">50% OFF</div>
                 <div className="text-sm">Summer Sale</div>
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl border border-amber-200">
+
+              {/* Rating card */}
+              <div className="absolute -bottom-6 -right-6 rounded-xl border border-amber-200 bg-white p-4 shadow-xl">
                 <div className="flex items-center">
                   <div className="flex text-amber-500">
                     {[...Array(5)].map((_, i) => (
@@ -160,11 +168,11 @@ const HomePage = () => {
               View All Categories
             </Link>
           </div>
-          {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {CATEGORIES.slice(0, 6).map((category) => (
-              <CategoryCard key={category.id} category={category} />
+              <CategoryCard key={category} />
             ))}
-          </div> */}
+          </div>
         </div>
       </section>
 
@@ -180,49 +188,46 @@ const HomePage = () => {
               View All Products
             </Link>
           </div>
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="card-amber animate-pulse">
-                  <div className="h-64 bg-gray-200 rounded-t-xl"></div>
-                  <div className="p-4">
-                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                    <div className="h-8 bg-gray-200 rounded"></div>
-                  </div>
-                </div>
+
+          <div className="container-custom">
+            <div className="flex items-center justify-between mb-10">
+              <Link to="/shop" className="btn-amber-outline"></Link>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {CATEGORIES.slice(0, 6).map((category) => (
+                <ProductCard key={category} />
               ))}
             </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredProducts.slice(0, 8).map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-            </div>
-          )}
+          </div>
         </div>
       </section>
 
       {/* New Arrivals */}
-      <section className="py-16 bg-gradient-to-b from-amber-50 to-white">
+      {/* <section className="py-16 bg-gradient-to-b from-amber-50 to-white">
         <div className="container-custom">
-          <div className="flex items-center justify-between mb-10">
+          {/* Title Section */}
+      {/* <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="mb-2">New Arrivals</h2>
+              <h2 className="text-2xl font-bold mb-1">New Arrivals</h2>
               <p className="text-gray-600">Recently added products</p>
             </div>
             <Link to="/shop?sort=newest" className="btn-amber-outline">
               Shop New Arrivals
             </Link>
-          </div>
+          </div> */}
+
+      {/* Product List
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="card-amber animate-pulse">
+                <div
+                  key={i}
+                  className="bg-white rounded-xl border animate-pulse"
+                >
                   <div className="h-64 bg-gray-200 rounded-t-xl"></div>
-                  <div className="p-4">
-                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                  <div className="p-4 space-y-3">
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
                     <div className="h-8 bg-gray-200 rounded"></div>
                   </div>
                 </div>
@@ -236,7 +241,7 @@ const HomePage = () => {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20">
